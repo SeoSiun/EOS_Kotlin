@@ -1,5 +1,7 @@
 package com.example.memo
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -8,6 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
+    val helper = SqliteHelper(this, "memo", 1)
+    val adapter = RecyclerAdapter()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -25,25 +31,56 @@ class MainActivity : AppCompatActivity() {
             return data
         }
 
-        val adapter = RecyclerAdapter()
+        adapter.helper = helper
 
         val recyclerMemo = findViewById<RecyclerView>(R.id.recyclerMemo)
         val buttonAdd = findViewById<Button>(R.id.buttonAdd)
 
-        adapter.listData = makeDummyData()
+        // adapter.listData = makeDummyData()
+        adapter.listData.addAll(helper.selectMemo())
 
         recyclerMemo.adapter = adapter
         recyclerMemo.layoutManager = LinearLayoutManager(this)
 
         buttonAdd.setOnClickListener {
-            Toast.makeText(this, "Add button", Toast.LENGTH_SHORT).show()
+          //  Toast.makeText(this, "Add button", Toast.LENGTH_SHORT).show()
 
-/*            val title = "이것은 ${adapter.listData.size} 번째 제목"
-            val content = "이것은 ${adapter.listData.size} 번째 내용"
-            val date = System.currentTimeMillis()
-            var memo = Memo(adapter.listData.size, title, content, date)
-            adapter.listData.add(memo)
-            recyclerMemo.adapter = adapter*/
+            val intent = Intent(this, DetailActivity::class.java)
+
+            val memo = Memo("","",System.currentTimeMillis())
+
+            intent.putExtra("memo", memo)
+
+            startActivityForResult(intent, 99)
+
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        val memo = data?.getSerializableExtra("returnMemo") as Memo
+
+        if(resultCode == Activity.RESULT_OK) {
+            when(requestCode) {
+                99-> {
+                    memo.datetime = System.currentTimeMillis()
+
+                    helper.insertMemo(memo)
+
+                    //화면 새로고침.
+                    adapter.listData.clear()
+                    adapter.listData.addAll(helper.selectMemo())
+                    adapter.notifyDataSetChanged()
+                }
+            }
+        }
+        else if(resultCode == Activity.RESULT_CANCELED) {
+            helper.deleteMemo(memo)
+
+            adapter.listData.clear()
+            adapter.listData.addAll(helper.selectMemo())
+            adapter.notifyDataSetChanged()
         }
     }
 }
