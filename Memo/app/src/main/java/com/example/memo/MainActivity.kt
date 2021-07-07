@@ -73,6 +73,16 @@ class MainActivity : AppCompatActivity() {
                     adapter.listData.addAll(helper.selectMemo())
                     adapter.notifyDataSetChanged()
                 }
+
+                100-> {
+                    memo.datetime = System.currentTimeMillis()
+
+                    helper.updateMemo(memo)
+
+                    adapter.listData.clear()
+                    adapter.listData.addAll(helper.selectMemo())
+                    adapter.notifyDataSetChanged()
+                }
             }
         }
         else if(resultCode == Activity.RESULT_CANCELED) {
