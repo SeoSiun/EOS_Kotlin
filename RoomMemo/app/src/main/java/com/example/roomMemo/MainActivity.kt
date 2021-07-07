@@ -5,19 +5,25 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
+import com.example.roomMemo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 //    val helper = SqliteHelper(this, "memo", 1)
     var helper:RoomDB? = null
     val adapter = RecyclerAdapter()
 
+    lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.activity = this         // xml에서 만든 변수, activity
 
         // databaseBuilder(db가 생성될 액티비티의 context, RoomDatabase를 상속받은 클래스, db의 이름)
         helper = Room.databaseBuilder(this, RoomDB::class.java, "room_memo")
@@ -26,16 +32,16 @@ class MainActivity : AppCompatActivity() {
 
         adapter.helper = helper
 
-        val recyclerMemo = findViewById<RecyclerView>(R.id.recyclerMemo)
-        val buttonAdd = findViewById<Button>(R.id.buttonAdd)
+//        val recyclerMemo = findViewById<RecyclerView>(R.id.recyclerMemo)
+//        val buttonAdd = findViewById<Button>(R.id.buttonAdd)
 
 //        adapter.listData.addAll(helper.selectMemo())
         adapter.listData = helper?.roomMemoDao()?.getAll() ?: mutableListOf()
 
-        recyclerMemo.adapter = adapter
-        recyclerMemo.layoutManager = LinearLayoutManager(this)
+        binding.recyclerMemo.adapter = adapter
+        binding.recyclerMemo.layoutManager = LinearLayoutManager(this)
 
-        buttonAdd.setOnClickListener {
+        binding.buttonAdd.setOnClickListener {
           //  Toast.makeText(this, "Add button", Toast.LENGTH_SHORT).show()
 
             val intent = Intent(this, DetailActivity::class.java)
