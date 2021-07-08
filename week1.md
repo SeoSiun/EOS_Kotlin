@@ -85,7 +85,6 @@ var bigger = if(a > b) a else b
 
     - 자바의 switch를 사용하는 것보다 훨씬 간결
 
-    ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4e32c9ec-7d67-4c23-8008-b76811692302/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4e32c9ec-7d67-4c23-8008-b76811692302/Untitled.png)
 
 - 파라미터가 없는 when
 
@@ -115,7 +114,6 @@ var bigger = if(a > b) a else b
 
 - 컬렉션 (Collection) : 개수가 정해져 있지 않음
 
-    ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f7cf46eb-3d72-4d2c-9bbc-155f95fc296f/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f7cf46eb-3d72-4d2c-9bbc-155f95fc296f/Untitled.png)
 
     - readonly는 상수 느낌 (val처럼) / 읽기만 가능
     - mutable은 변수느낌 (var 처럼) / 각각 수정 가능
@@ -135,7 +133,7 @@ var bigger = if(a > b) a else b
     - key는 리스트에서의 인덱스와 비슷하지만 리스트와 다르게 키를 직접 입력해줘야 함
     - 값 1에 접근하기 위해 키1이 필요
 
-        ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f825536e-f274-49bf-8959-47842aaf51a8/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f825536e-f274-49bf-8959-47842aaf51a8/Untitled.png)
+
 
     - ex)
 
@@ -146,7 +144,6 @@ var bigger = if(a > b) a else b
         	"중국" to "베이징",
         ```
 
-        ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/98a1620d-d64c-4030-853c-0746fcee2c8c/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/98a1620d-d64c-4030-853c-0746fcee2c8c/Untitled.png)
 
 ## [반복문]
 
