@@ -108,7 +108,6 @@
 ### -SQLite DB
 
 - 데이터 구조 설계 → DDL 사용
-
     ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6b294e75-7a38-4b6d-a972-a10dffaff24d/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6b294e75-7a38-4b6d-a972-a10dffaff24d/Untitled.png)
 
 ### - 쿼리 작성하기
